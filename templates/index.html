@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>ATIP Platform</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            AI-Powered Travelator Intelligence Platform
+        </h1>
+
+        <p>
+            Real-Time Mobility Analytics, Congestion Intelligence,
+            Predictive Health Monitoring & Digital Behavior Twin
+        </p>
+
+    </div>
+
+</div>
+
+<div class="dashboard-card">
+
+<form action="/predict" method="post">
+
+<div class="grid">
+
+<div class="input-box">
+<label>Passenger Count</label>
+<input type="number" name="Passenger_Count" required>
+</div>
+
+<div class="input-box">
+<label>Occupancy Percentage</label>
+<input type="number" name="Occupancy_Percentage" required>
+</div>
+
+<div class="input-box">
+<label>Average Travel Time</label>
+<input type="number" name="Average_Travel_Time" required>
+</div>
+
+<div class="input-box">
+<label>Luggage Count</label>
+<input type="number" name="Luggage_Count" required>
+</div>
+
+<div class="input-box">
+<label>Elderly Count</label>
+<input type="number" name="Elderly_Count" required>
+</div>
+
+<div class="input-box">
+<label>Wheelchair Count</label>
+<input type="number" name="Wheelchair_Count" required>
+</div>
+
+<div class="input-box">
+<label>Temperature</label>
+<input type="number" step="0.1" name="Temperature" required>
+</div>
+
+<div class="input-box">
+<label>Vibration</label>
+<input type="number" step="0.1" name="Vibration" required>
+</div>
+
+<div class="input-box">
+<label>Energy Usage</label>
+<input type="number" step="0.1" name="Energy_Usage" required>
+</div>
+
+<div class="input-box">
+<label>Holiday (0/1)</label>
+<input type="number" name="Is_Holiday" required>
+</div>
+
+</div>
+
+<button class="predict-btn" type="submit">
+Generate AI Intelligence Report
+</button>
+
+</form>
+
+</div>
+
+</body>
+</html>

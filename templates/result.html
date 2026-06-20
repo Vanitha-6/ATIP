@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>ATIP Intelligence Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- TOP BAR -->
+
+    <div class="top-bar">
+
+        <div>
+
+            <h1>ATIP Control Center</h1>
+
+            <p>
+                AI Mobility Intelligence Dashboard
+            </p>
+
+        </div>
+
+        <div class="status">
+
+            System Operational
+
+        </div>
+
+    </div>
+
+    <!-- KPI CARDS -->
+
+    <div class="cards">
+
+        <div class="card {{ congestion_color }}">
+
+            <h2>Congestion Level</h2>
+
+            <h1>{{ congestion_level }}</h1>
+
+        </div>
+
+        <div class="card comfort">
+
+            <h2>Passenger Comfort</h2>
+
+            <h1>{{ comfort_score }}/100</h1>
+
+            <p>{{ comfort_status }}</p>
+
+        </div>
+
+        <div class="card accessibility">
+
+            <h2>Accessibility Index</h2>
+
+            <h1>{{ accessibility_score }}/100</h1>
+
+            <p>{{ accessibility_status }}</p>
+
+        </div>
+
+        <div class="card health">
+
+            <h2>Health Intelligence</h2>
+
+            <h1>{{ health_score }}/100</h1>
+
+            <p>{{ health_status }}</p>
+
+        </div>
+
+    </div>
+
+    <!-- AI RECOMMENDATION -->
+
+    <div class="recommendation-box">
+
+        <div class="ai-header">
+
+            AI Copilot Recommendation
+
+        </div>
+
+        <div class="ai-message">
+
+            {{ recommendation }}
+
+        </div>
+
+    </div>
+    <div class="action-box">
+
+    <h2>💡 Smart Action Center</h2>
+
+    <ul>
+        {% for action in suggestions %}
+        <li>{{ action }}</li>
+        {% endfor %}
+    </ul>
+
+</div>
+
+    <!-- FUTURE FORECAST -->
+
+    <div class="prediction-box">
+
+    <h2>Future Congestion Predictor</h2>
+
+    <div class="forecast-card">
+
+        <h3>15-Minute Congestion Forecast</h3>
+
+        <p>
+            <strong>{{ future_15 }}% Occupancy</strong>
+        </p>
+
+        <p>
+            Status:
+            {% if future_15 >= 85 %}
+                Severe Congestion Expected
+            {% elif future_15 >= 70 %}
+                High Traffic Expected
+            {% elif future_15 >= 50 %}
+                Moderate Traffic Expected
+            {% else %}
+                Low Traffic Expected
+            {% endif %}
+        </p>
+
+    </div>
+
+    <br>
+
+    <div class="forecast-card">
+
+        <h3>30-Minute Congestion Forecast</h3>
+
+        <p>
+            <strong>{{ future_30 }}% Occupancy</strong>
+        </p>
+
+        <p>
+            Status:
+            {% if future_30 >= 85 %}
+                Severe Congestion Expected
+            {% elif future_30 >= 70 %}
+                High Traffic Expected
+            {% elif future_30 >= 50 %}
+                Moderate Traffic Expected
+            {% else %}
+                Low Traffic Expected
+            {% endif %}
+        </p>
+
+    </div>
+
+    <br>
+
+    <p>
+        <strong>Expected Passenger Count:</strong>
+        {{ expected_passengers }}
+    </p>
+
+</div>
+
+    <!-- DIGITAL TWIN -->
+
+    <div class="prediction-box">
+
+        <h2>Digital Behavior Twin</h2>
+
+        <br>
+
+        <p>
+            <strong>Current Passenger Count:</strong>
+            {{ current_passengers }}
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Expected Passenger Count:</strong>
+            {{ expected_passengers }}
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Crowd Growth:</strong>
+            {{ growth_rate }}%
+        </p>
+
+        <br>
+
+        <p>
+            <strong>Risk Level:</strong>
+            {{ risk_level }}
+        </p>
+
+    </div>
+    <!-- ANALYTICS CHART -->
+
+    <div class="chart-container">
+
+        <h2>Live Intelligence Analytics</h2>
+
+        <canvas id="analyticsChart"></canvas>
+
+    </div>
+
+    <!-- FOOTER BUTTON -->
+
+    <div class="back-btn">
+
+        <a href="/">
+            Back To Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+const ctx = document.getElementById('analyticsChart');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: [
+            'Comfort',
+            'Accessibility',
+            'Health'
+        ],
+
+        datasets: [{
+
+            label: 'ATIP Scores',
+
+            data: [
+
+                Number("{{ comfort_score }}"),
+                Number("{{ accessibility_score }}"),
+                Number("{{ health_score }}")
+
+            ],
+
+            borderWidth: 1
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+
+                labels: {
+
+                    color: 'white'
+
+                }
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                max: 100,
+
+                ticks: {
+
+                    color: 'white'
+
+                }
+
+            },
+
+            x: {
+
+                ticks: {
+
+                    color: 'white'
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
